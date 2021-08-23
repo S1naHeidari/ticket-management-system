@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RequestManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="account">
+    <Key>
+      <PropertyRef Name="accountUsername" />
+    </Key>
+    <Property Name="accountUsername" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="lastLogin" Type="datetime" />
+    <Property Name="accountPassword" Type="varchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="attendant">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="id" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="firstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="lastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="fatherName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="birthday" Type="date" Nullable="false" />
+    <Property Name="phoneNumber" Type="varchar" MaxLength="11" Nullable="false" />
+  </EntityType>
+  <EntityType Name="student">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="id" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="firstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="lastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="fatherName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="birthday" Type="date" Nullable="false" />
+    <Property Name="socialId" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="gender" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="entranceYear" Type="date" Nullable="false" />
+    <Property Name="grade" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="educationField" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="phoneNumber" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="studyingLiecense">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="requestCode" />
+    </Key>
+    <Property Name="id" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="requestCode" Type="int" Nullable="false" />
+    <Property Name="destinationCity" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="liecenseDetails" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="officeDestination" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="studentExplanation" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="liecenseCase1" Type="nvarchar" MaxLength="40" Nullable="false" />
+    <Property Name="liecenseCase2" Type="nvarchar" MaxLength="40" />
+    <Property Name="liecenseCase3" Type="nvarchar" MaxLength="40" />
+    <Property Name="liecenseCase4" Type="nvarchar" MaxLength="40" />
+    <Property Name="sendDate" Type="date" />
+    <Property Name="accepted" Type="nvarchar" MaxLength="3" />
+  </EntityType>
+  <EntityType Name="transfer">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="requestCode" />
+    </Key>
+    <Property Name="id" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="requestCode" Type="int" Nullable="false" />
+    <Property Name="currentSemester" Type="int" Nullable="false" />
+    <Property Name="destinationName" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="unitCount" Type="int" />
+    <Property Name="destConfirmNumber" Type="int" />
+    <Property Name="destConfirmDate" Type="date" />
+    <Property Name="accepted" Type="nvarchar" MaxLength="3" />
+    <Property Name="sendDate" Type="date" />
+  </EntityType>
+  <Association Name="FK__attendant__usern__756D6ECB">
+    <End Role="account" Type="Self.account" Multiplicity="1" />
+    <End Role="attendant" Type="Self.attendant" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="account">
+        <PropertyRef Name="accountUsername" />
+      </Principal>
+      <Dependent Role="attendant">
+        <PropertyRef Name="username" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__student__usernam__3F115E1A">
+    <End Role="account" Type="Self.account" Multiplicity="1" />
+    <End Role="student" Type="Self.student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="account">
+        <PropertyRef Name="accountUsername" />
+      </Principal>
+      <Dependent Role="student">
+        <PropertyRef Name="username" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__studyingLiec__id__603D47BB">
+    <End Role="student" Type="Self.student" Multiplicity="1" />
+    <End Role="studyingLiecense" Type="Self.studyingLiecense" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="student">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="studyingLiecense">
+        <PropertyRef Name="id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__transfer__id__0880433F">
+    <End Role="student" Type="Self.student" Multiplicity="1" />
+    <End Role="transfer" Type="Self.transfer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="student">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="transfer">
+        <PropertyRef Name="id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="RequestManagementModelStoreContainer">
+    <EntitySet Name="account" EntityType="Self.account" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="attendant" EntityType="Self.attendant" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="student" EntityType="Self.student" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="studyingLiecense" EntityType="Self.studyingLiecense" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="transfer" EntityType="Self.transfer" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__attendant__usern__756D6ECB" Association="Self.FK__attendant__usern__756D6ECB">
+      <End Role="account" EntitySet="account" />
+      <End Role="attendant" EntitySet="attendant" />
+    </AssociationSet>
+    <AssociationSet Name="FK__student__usernam__3F115E1A" Association="Self.FK__student__usernam__3F115E1A">
+      <End Role="account" EntitySet="account" />
+      <End Role="student" EntitySet="student" />
+    </AssociationSet>
+    <AssociationSet Name="FK__studyingLiec__id__603D47BB" Association="Self.FK__studyingLiec__id__603D47BB">
+      <End Role="student" EntitySet="student" />
+      <End Role="studyingLiecense" EntitySet="studyingLiecense" />
+    </AssociationSet>
+    <AssociationSet Name="FK__transfer__id__0880433F" Association="Self.FK__transfer__id__0880433F">
+      <End Role="student" EntitySet="student" />
+      <End Role="transfer" EntitySet="transfer" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

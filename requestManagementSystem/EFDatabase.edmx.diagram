@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ef69565bd545480188df708bf52b72eb" Name="Diagram1">
+        <EntityTypeShape EntityType="RequestManagementModel.account" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="RequestManagementModel.attendant" Width="1.5" PointX="3" PointY="5.625" />
+        <EntityTypeShape EntityType="RequestManagementModel.student" Width="1.5" PointX="3" PointY="1.125" />
+        <EntityTypeShape EntityType="RequestManagementModel.transfer" Width="1.5" PointX="5.25" PointY="1.625" />
+        <AssociationConnector Association="RequestManagementModel.FK__attendant__usern__756D6ECB" />
+        <AssociationConnector Association="RequestManagementModel.FK__student__usernam__3F115E1A" />
+        <AssociationConnector Association="RequestManagementModel.FK__transfer__id__0880433F" />
+        <EntityTypeShape EntityType="RequestManagementModel.studyingLiecense" PointX="5.25" PointY="6.375" Width="1.5" />
+        <AssociationConnector Association="RequestManagementModel.FK__studyingLiec__id__603D47BB" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

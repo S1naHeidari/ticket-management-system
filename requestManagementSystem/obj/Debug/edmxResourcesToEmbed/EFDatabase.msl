@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="RequestManagementModelStoreContainer" CdmEntityContainer="RequestManagementEntities">
+    <EntitySetMapping Name="accounts">
+      <EntityTypeMapping TypeName="RequestManagementModel.account">
+        <MappingFragment StoreEntitySet="account">
+          <ScalarProperty Name="accountPassword" ColumnName="accountPassword" />
+          <ScalarProperty Name="lastLogin" ColumnName="lastLogin" />
+          <ScalarProperty Name="accountUsername" ColumnName="accountUsername" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="attendants">
+      <EntityTypeMapping TypeName="RequestManagementModel.attendant">
+        <MappingFragment StoreEntitySet="attendant">
+          <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+          <ScalarProperty Name="birthday" ColumnName="birthday" />
+          <ScalarProperty Name="fatherName" ColumnName="fatherName" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="username" ColumnName="username" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="students">
+      <EntityTypeMapping TypeName="RequestManagementModel.student">
+        <MappingFragment StoreEntitySet="student">
+          <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+          <ScalarProperty Name="educationField" ColumnName="educationField" />
+          <ScalarProperty Name="grade" ColumnName="grade" />
+          <ScalarProperty Name="entranceYear" ColumnName="entranceYear" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="socialId" ColumnName="socialId" />
+          <ScalarProperty Name="birthday" ColumnName="birthday" />
+          <ScalarProperty Name="fatherName" ColumnName="fatherName" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="username" ColumnName="username" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="transfers">
+      <EntityTypeMapping TypeName="RequestManagementModel.transfer">
+        <MappingFragment StoreEntitySet="transfer">
+          <ScalarProperty Name="sendDate" ColumnName="sendDate" />
+          <ScalarProperty Name="accepted" ColumnName="accepted" />
+          <ScalarProperty Name="destConfirmDate" ColumnName="destConfirmDate" />
+          <ScalarProperty Name="destConfirmNumber" ColumnName="destConfirmNumber" />
+          <ScalarProperty Name="unitCount" ColumnName="unitCount" />
+          <ScalarProperty Name="destinationName" ColumnName="destinationName" />
+          <ScalarProperty Name="currentSemester" ColumnName="currentSemester" />
+          <ScalarProperty Name="requestCode" ColumnName="requestCode" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="studyingLiecenses">
+      <EntityTypeMapping TypeName="RequestManagementModel.studyingLiecense">
+        <MappingFragment StoreEntitySet="studyingLiecense">
+          <ScalarProperty Name="accepted" ColumnName="accepted" />
+          <ScalarProperty Name="sendDate" ColumnName="sendDate" />
+          <ScalarProperty Name="liecenseCase4" ColumnName="liecenseCase4" />
+          <ScalarProperty Name="liecenseCase3" ColumnName="liecenseCase3" />
+          <ScalarProperty Name="liecenseCase2" ColumnName="liecenseCase2" />
+          <ScalarProperty Name="liecenseCase1" ColumnName="liecenseCase1" />
+          <ScalarProperty Name="studentExplanation" ColumnName="studentExplanation" />
+          <ScalarProperty Name="officeDestination" ColumnName="officeDestination" />
+          <ScalarProperty Name="liecenseDetails" ColumnName="liecenseDetails" />
+          <ScalarProperty Name="destinationCity" ColumnName="destinationCity" />
+          <ScalarProperty Name="requestCode" ColumnName="requestCode" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

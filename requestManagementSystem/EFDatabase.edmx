@@ -1,0 +1,404 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="RequestManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="account">
+          <Key>
+            <PropertyRef Name="accountUsername" />
+          </Key>
+          <Property Name="accountUsername" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="lastLogin" Type="datetime" />
+          <Property Name="accountPassword" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="attendant">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="firstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="lastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="fatherName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="birthday" Type="date" Nullable="false" />
+          <Property Name="phoneNumber" Type="varchar" MaxLength="11" Nullable="false" />
+        </EntityType>
+        <EntityType Name="student">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="id" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="firstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="lastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="fatherName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="birthday" Type="date" Nullable="false" />
+          <Property Name="socialId" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="gender" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="entranceYear" Type="date" Nullable="false" />
+          <Property Name="grade" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="educationField" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="phoneNumber" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="studyingLiecense">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="requestCode" />
+          </Key>
+          <Property Name="id" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="requestCode" Type="int" Nullable="false" />
+          <Property Name="destinationCity" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="liecenseDetails" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="officeDestination" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="studentExplanation" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="liecenseCase1" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="liecenseCase2" Type="nvarchar" MaxLength="40" />
+          <Property Name="liecenseCase3" Type="nvarchar" MaxLength="40" />
+          <Property Name="liecenseCase4" Type="nvarchar" MaxLength="40" />
+          <Property Name="sendDate" Type="date" />
+          <Property Name="accepted" Type="nvarchar" MaxLength="3" />
+        </EntityType>
+        <EntityType Name="transfer">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="requestCode" />
+          </Key>
+          <Property Name="id" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="requestCode" Type="int" Nullable="false" />
+          <Property Name="currentSemester" Type="int" Nullable="false" />
+          <Property Name="destinationName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="unitCount" Type="int" />
+          <Property Name="destConfirmNumber" Type="int" />
+          <Property Name="destConfirmDate" Type="date" />
+          <Property Name="accepted" Type="nvarchar" MaxLength="3" />
+          <Property Name="sendDate" Type="date" />
+        </EntityType>
+        <Association Name="FK__attendant__usern__756D6ECB">
+          <End Role="account" Type="Self.account" Multiplicity="1" />
+          <End Role="attendant" Type="Self.attendant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="account">
+              <PropertyRef Name="accountUsername" />
+            </Principal>
+            <Dependent Role="attendant">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__student__usernam__3F115E1A">
+          <End Role="account" Type="Self.account" Multiplicity="1" />
+          <End Role="student" Type="Self.student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="account">
+              <PropertyRef Name="accountUsername" />
+            </Principal>
+            <Dependent Role="student">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__studyingLiec__id__603D47BB">
+          <End Role="student" Type="Self.student" Multiplicity="1" />
+          <End Role="studyingLiecense" Type="Self.studyingLiecense" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="student">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="studyingLiecense">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__transfer__id__0880433F">
+          <End Role="student" Type="Self.student" Multiplicity="1" />
+          <End Role="transfer" Type="Self.transfer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="student">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="transfer">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RequestManagementModelStoreContainer">
+          <EntitySet Name="account" EntityType="Self.account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="attendant" EntityType="Self.attendant" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="student" EntityType="Self.student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="studyingLiecense" EntityType="Self.studyingLiecense" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="transfer" EntityType="Self.transfer" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__attendant__usern__756D6ECB" Association="Self.FK__attendant__usern__756D6ECB">
+            <End Role="account" EntitySet="account" />
+            <End Role="attendant" EntitySet="attendant" />
+          </AssociationSet>
+          <AssociationSet Name="FK__student__usernam__3F115E1A" Association="Self.FK__student__usernam__3F115E1A">
+            <End Role="account" EntitySet="account" />
+            <End Role="student" EntitySet="student" />
+          </AssociationSet>
+          <AssociationSet Name="FK__studyingLiec__id__603D47BB" Association="Self.FK__studyingLiec__id__603D47BB">
+            <End Role="student" EntitySet="student" />
+            <End Role="studyingLiecense" EntitySet="studyingLiecense" />
+          </AssociationSet>
+          <AssociationSet Name="FK__transfer__id__0880433F" Association="Self.FK__transfer__id__0880433F">
+            <End Role="student" EntitySet="student" />
+            <End Role="transfer" EntitySet="transfer" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RequestManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="RequestManagementEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="accounts" EntityType="RequestManagementModel.account" />
+          <EntitySet Name="attendants" EntityType="RequestManagementModel.attendant" />
+          <EntitySet Name="students" EntityType="RequestManagementModel.student" />
+          <EntitySet Name="transfers" EntityType="RequestManagementModel.transfer" />
+          <AssociationSet Name="FK__attendant__usern__756D6ECB" Association="RequestManagementModel.FK__attendant__usern__756D6ECB">
+            <End Role="account" EntitySet="accounts" />
+            <End Role="attendant" EntitySet="attendants" />
+          </AssociationSet>
+          <AssociationSet Name="FK__student__usernam__3F115E1A" Association="RequestManagementModel.FK__student__usernam__3F115E1A">
+            <End Role="account" EntitySet="accounts" />
+            <End Role="student" EntitySet="students" />
+          </AssociationSet>
+          <AssociationSet Name="FK__transfer__id__0880433F" Association="RequestManagementModel.FK__transfer__id__0880433F">
+            <End Role="student" EntitySet="students" />
+            <End Role="transfer" EntitySet="transfers" />
+          </AssociationSet>
+          <EntitySet Name="studyingLiecenses" EntityType="RequestManagementModel.studyingLiecense" />
+          <AssociationSet Name="FK__studyingLiec__id__603D47BB" Association="RequestManagementModel.FK__studyingLiec__id__603D47BB">
+            <End EntitySet="students" Role="student" />
+            <End EntitySet="studyingLiecenses" Role="studyingLiecense" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="account">
+          <Key>
+            <PropertyRef Name="accountUsername" />
+          </Key>
+          <Property Name="accountUsername" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="lastLogin" Type="DateTime" Precision="3" />
+          <Property Name="accountPassword" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="attendants" Relationship="RequestManagementModel.FK__attendant__usern__756D6ECB" FromRole="account" ToRole="attendant" />
+          <NavigationProperty Name="students" Relationship="RequestManagementModel.FK__student__usernam__3F115E1A" FromRole="account" ToRole="student" />
+        </EntityType>
+        <EntityType Name="attendant">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="firstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="lastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fatherName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="birthday" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="phoneNumber" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="account" Relationship="RequestManagementModel.FK__attendant__usern__756D6ECB" FromRole="attendant" ToRole="account" />
+        </EntityType>
+        <EntityType Name="student">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="firstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="lastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fatherName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="birthday" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="socialId" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="gender" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="entranceYear" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="grade" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="educationField" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="phoneNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="account" Relationship="RequestManagementModel.FK__student__usernam__3F115E1A" FromRole="student" ToRole="account" />
+          <NavigationProperty Name="transfers" Relationship="RequestManagementModel.FK__transfer__id__0880433F" FromRole="student" ToRole="transfer" />
+          <NavigationProperty Name="studyingLiecenses" Relationship="RequestManagementModel.FK__studyingLiec__id__603D47BB" FromRole="student" ToRole="studyingLiecense" />
+        </EntityType>
+        <EntityType Name="transfer">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="requestCode" />
+          </Key>
+          <Property Name="id" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="requestCode" Type="Int32" Nullable="false" />
+          <Property Name="currentSemester" Type="Int32" Nullable="false" />
+          <Property Name="destinationName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="unitCount" Type="Int32" />
+          <Property Name="destConfirmNumber" Type="Int32" />
+          <Property Name="destConfirmDate" Type="DateTime" Precision="0" />
+          <Property Name="accepted" Type="String" MaxLength="3" FixedLength="false" Unicode="true" DefaultValue="خیر" />
+          <Property Name="sendDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="student" Relationship="RequestManagementModel.FK__transfer__id__0880433F" FromRole="transfer" ToRole="student" />
+        </EntityType>
+        <Association Name="FK__attendant__usern__756D6ECB">
+          <End Type="RequestManagementModel.account" Role="account" Multiplicity="1" />
+          <End Type="RequestManagementModel.attendant" Role="attendant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="account">
+              <PropertyRef Name="accountUsername" />
+            </Principal>
+            <Dependent Role="attendant">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__student__usernam__3F115E1A">
+          <End Type="RequestManagementModel.account" Role="account" Multiplicity="1" />
+          <End Type="RequestManagementModel.student" Role="student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="account">
+              <PropertyRef Name="accountUsername" />
+            </Principal>
+            <Dependent Role="student">
+              <PropertyRef Name="username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__transfer__id__0880433F">
+          <End Type="RequestManagementModel.student" Role="student" Multiplicity="1" />
+          <End Type="RequestManagementModel.transfer" Role="transfer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="student">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="transfer">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="studyingLiecense">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="requestCode" />
+          </Key>
+          <Property Name="id" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="requestCode" Nullable="false" Type="Int32" />
+          <Property Name="destinationCity" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="liecenseDetails" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="officeDestination" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="studentExplanation" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="liecenseCase1" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="liecenseCase2" MaxLength="40" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="liecenseCase3" MaxLength="40" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="liecenseCase4" MaxLength="40" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="sendDate" Precision="0" Type="DateTime" />
+          <Property Name="accepted" MaxLength="3" FixedLength="false" Unicode="true" Type="String" />
+          <NavigationProperty Name="student" Relationship="RequestManagementModel.FK__studyingLiec__id__603D47BB" FromRole="studyingLiecense" ToRole="student" />
+        </EntityType>
+        <Association Name="FK__studyingLiec__id__603D47BB">
+          <End Type="RequestManagementModel.student" Multiplicity="1" Role="student" />
+          <End Type="RequestManagementModel.studyingLiecense" Multiplicity="*" Role="studyingLiecense" />
+          <ReferentialConstraint>
+            <Principal Role="student">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="studyingLiecense">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RequestManagementModelStoreContainer" CdmEntityContainer="RequestManagementEntities">
+          <EntitySetMapping Name="accounts">
+            <EntityTypeMapping TypeName="RequestManagementModel.account">
+              <MappingFragment StoreEntitySet="account">
+                <ScalarProperty Name="accountPassword" ColumnName="accountPassword" />
+                <ScalarProperty Name="lastLogin" ColumnName="lastLogin" />
+                <ScalarProperty Name="accountUsername" ColumnName="accountUsername" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="attendants">
+            <EntityTypeMapping TypeName="RequestManagementModel.attendant">
+              <MappingFragment StoreEntitySet="attendant">
+                <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+                <ScalarProperty Name="birthday" ColumnName="birthday" />
+                <ScalarProperty Name="fatherName" ColumnName="fatherName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="username" ColumnName="username" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="students">
+            <EntityTypeMapping TypeName="RequestManagementModel.student">
+              <MappingFragment StoreEntitySet="student">
+                <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+                <ScalarProperty Name="educationField" ColumnName="educationField" />
+                <ScalarProperty Name="grade" ColumnName="grade" />
+                <ScalarProperty Name="entranceYear" ColumnName="entranceYear" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="socialId" ColumnName="socialId" />
+                <ScalarProperty Name="birthday" ColumnName="birthday" />
+                <ScalarProperty Name="fatherName" ColumnName="fatherName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="username" ColumnName="username" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="transfers">
+            <EntityTypeMapping TypeName="RequestManagementModel.transfer">
+              <MappingFragment StoreEntitySet="transfer">
+                <ScalarProperty Name="sendDate" ColumnName="sendDate" />
+                <ScalarProperty Name="accepted" ColumnName="accepted" />
+                <ScalarProperty Name="destConfirmDate" ColumnName="destConfirmDate" />
+                <ScalarProperty Name="destConfirmNumber" ColumnName="destConfirmNumber" />
+                <ScalarProperty Name="unitCount" ColumnName="unitCount" />
+                <ScalarProperty Name="destinationName" ColumnName="destinationName" />
+                <ScalarProperty Name="currentSemester" ColumnName="currentSemester" />
+                <ScalarProperty Name="requestCode" ColumnName="requestCode" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="studyingLiecenses">
+            <EntityTypeMapping TypeName="RequestManagementModel.studyingLiecense">
+              <MappingFragment StoreEntitySet="studyingLiecense">
+                <ScalarProperty Name="accepted" ColumnName="accepted" />
+                <ScalarProperty Name="sendDate" ColumnName="sendDate" />
+                <ScalarProperty Name="liecenseCase4" ColumnName="liecenseCase4" />
+                <ScalarProperty Name="liecenseCase3" ColumnName="liecenseCase3" />
+                <ScalarProperty Name="liecenseCase2" ColumnName="liecenseCase2" />
+                <ScalarProperty Name="liecenseCase1" ColumnName="liecenseCase1" />
+                <ScalarProperty Name="studentExplanation" ColumnName="studentExplanation" />
+                <ScalarProperty Name="officeDestination" ColumnName="officeDestination" />
+                <ScalarProperty Name="liecenseDetails" ColumnName="liecenseDetails" />
+                <ScalarProperty Name="destinationCity" ColumnName="destinationCity" />
+                <ScalarProperty Name="requestCode" ColumnName="requestCode" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
